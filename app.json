@@ -10,15 +10,16 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#0E1117"
+      "backgroundColor": "#6B21C9"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.rolet.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#0E1117"
+        "backgroundColor": "#6B21C9"
       },
       "edgeToEdgeEnabled": true
     },
