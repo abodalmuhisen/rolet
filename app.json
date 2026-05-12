@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#5014A3"
+      "backgroundColor": "#4F14A0"
     },
     "ios": {
       "supportsTablet": true
@@ -19,12 +19,18 @@
       "package": "com.rolet.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#5014A3"
+        "backgroundColor": "#4F14A0"
       },
       "edgeToEdgeEnabled": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "14c0f67c-1233-45d0-bb93-d71783499c01"
+      }
+    },
+    "owner": "abodalmuhisen"
   }
 }

@@ -65,7 +65,10 @@ export default function HomeScreen({ navigation }) {
       : false;
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+    <SafeAreaView
+      style={styles.safe}
+      edges={['top', 'left', 'right', 'bottom']}
+    >
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.title}>Rolet</Text>

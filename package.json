@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "expo start",
+    "assets:blank": "python scripts/make_solid_assets.py",
     "build:apk": "npx eas-cli@latest build --platform android --profile preview",
     "eas:login": "npx eas-cli@latest login",
     "eas:init": "npx eas-cli@latest init",

@@ -408,7 +408,10 @@ export default function GameScreen({ navigation, route }) {
   if (!game) return null;
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+    <SafeAreaView
+      style={styles.safe}
+      edges={['top', 'left', 'right', 'bottom']}
+    >
       <View style={styles.container}>
         <View style={styles.header}>
           <Pressable
