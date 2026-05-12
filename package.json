@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "start": "expo start",
-    "build:apk": "eas build --platform android --profile preview",
+    "build:apk": "npx eas-cli@latest build --platform android --profile preview",
+    "eas:login": "npx eas-cli@latest login",
+    "eas:init": "npx eas-cli@latest init",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
@@ -25,6 +27,7 @@
   },
   "private": true,
   "devDependencies": {
-    "babel-preset-expo": "~54.0.10"
+    "babel-preset-expo": "~54.0.10",
+    "eas-cli": "^18.11.0"
   }
 }
