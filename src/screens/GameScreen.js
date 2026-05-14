@@ -309,21 +309,23 @@ export default function GameScreen({ navigation, route }) {
       setDice(finalDice);
       recordRollForCurrentPlayer(finalDice);
 
-      let monopolyNextPlayerId = null;
-      if (game?.id === 'monopoly') {
-        const order = playersRef.current;
-        const pid = currentPlayerIdRef.current;
-        const cur = order.find((p) => p.id === pid);
-        const { outcome } = monopolyDiceOutcome(
-          finalDice,
-          cur?.consecutiveDoubles
-        );
-        const passTurn = outcome === 'normal' || outcome === 'jail';
-        if (passTurn && order.length > 0) {
-          const idx = order.findIndex((p) => p.id === pid);
-          if (idx >= 0) {
-            monopolyNextPlayerId = order[(idx + 1) % order.length].id;
+      const order = playersRef.current;
+      const pid = currentPlayerIdRef.current;
+      const idx = order.findIndex((p) => p.id === pid);
+      let nextPlayerIdAfterRoll = null;
+      if (order.length > 0 && idx >= 0) {
+        if (game?.id === 'monopoly') {
+          const cur = order[idx];
+          const { outcome } = monopolyDiceOutcome(
+            finalDice,
+            cur?.consecutiveDoubles
+          );
+          const passTurn = outcome === 'normal' || outcome === 'jail';
+          if (passTurn) {
+            nextPlayerIdAfterRoll = order[(idx + 1) % order.length].id;
           }
+        } else {
+          nextPlayerIdAfterRoll = order[(idx + 1) % order.length].id;
         }
       }
 
@@ -351,8 +353,8 @@ export default function GameScreen({ navigation, route }) {
       ]).start(() => {
         isRollingRef.current = false;
         setIsRolling(false);
-        if (monopolyNextPlayerId != null) {
-          setTimeout(() => setCurrentPlayerId(monopolyNextPlayerId), 0);
+        if (nextPlayerIdAfterRoll != null) {
+          setTimeout(() => setCurrentPlayerId(nextPlayerIdAfterRoll), 0);
         }
       });
     });

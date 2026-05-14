@@ -1,4 +1,11 @@
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { COLORS } from '../theme';
 
 function formatRollTime(ts) {
@@ -21,8 +28,13 @@ export default function HistoryModal({ player, onClose, onClear }) {
       animationType="fade"
       onRequestClose={onClose}
     >
-      <Pressable style={styles.modalBackdrop} onPress={onClose}>
-        <Pressable style={styles.modalCard} onPress={() => {}}>
+      <View style={styles.modalBackdrop}>
+        <Pressable
+          style={styles.modalBackdropHit}
+          onPress={onClose}
+          accessibilityLabel="Dismiss"
+        />
+        <View style={styles.modalCard}>
           <View style={styles.modalHeader}>
             <View style={{ flex: 1 }}>
               <Text style={styles.modalTitle}>{player ? player.name : ''}</Text>
@@ -47,8 +59,12 @@ export default function HistoryModal({ player, onClose, onClear }) {
             </Text>
           ) : (
             <ScrollView
+              key={player.id}
               style={styles.historyList}
               contentContainerStyle={styles.historyListContent}
+              nestedScrollEnabled
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator
             >
               {history.map((entry, i) => {
                 const total = entry.dice.reduce((a, b) => a + b, 0);
@@ -108,8 +124,8 @@ export default function HistoryModal({ player, onClose, onClear }) {
               <Text style={styles.editorBtnPrimaryText}>Done</Text>
             </Pressable>
           </View>
-        </Pressable>
-      </Pressable>
+        </View>
+      </View>
     </Modal>
   );
 }
@@ -117,10 +133,13 @@ export default function HistoryModal({ player, onClose, onClear }) {
 const styles = StyleSheet.create({
   modalBackdrop: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.55)',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+  },
+  modalBackdropHit: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.55)',
   },
   modalCard: {
     width: '100%',
@@ -131,6 +150,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.cardEdge,
     padding: 16,
+    zIndex: 1,
   },
   modalHeader: {
     flexDirection: 'row',
@@ -171,6 +191,8 @@ const styles = StyleSheet.create({
     paddingVertical: 28,
   },
   historyList: {
+    flexGrow: 0,
+    flexShrink: 1,
     maxHeight: 380,
   },
   historyListContent: {
